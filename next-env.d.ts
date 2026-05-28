@@ -1,6 +1,5 @@
 /// <reference types="next" />
-/// <reference types="next/types/global" />
+/// <reference types="next/image-types/global" />
 
-// NOTE: This file should not be edited because it is automatically configured by Next.js.
-// Each entry in the `env` section represents an environment variable that the developer
-// can use in their code. The `env` section is optional and only used for local development.
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/building-your-application/configuring/typescript for more information.

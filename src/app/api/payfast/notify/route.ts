@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyPayfastITN } from '@/lib/payfast'
+import { createServerClient } from '@supabase/ssr'
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
@@ -14,8 +15,12 @@ export async function POST(request: NextRequest) {
   if (isValid) {
     const bookingId = data.m_payment_id
     
-    // Update booking status
-    const supabase = createClient()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      { cookies: { getAll: () => [], setAll: () => {} } }
+    )
+    
     await supabase
       .from('bookings')
       .update({ 
@@ -26,13 +31,4 @@ export async function POST(request: NextRequest) {
   }
 
   return new NextResponse('OK')
-}
-
-function createClient() {
-  const { createServerClient } = require('@supabase/ssr')
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    { cookies: { getAll: () => [], setAll: () => {} } }
-  ).supabase
 }

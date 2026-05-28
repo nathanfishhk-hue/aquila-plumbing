@@ -56,7 +56,7 @@ export default function Testimonials() {
                   <span key={i} className="text-yellow-400 text-xl">★</span>
                 ))}
               </div>
-              <p className="mb-6 text-lg">"{t.text}"</p>
+              <p className="mb-6 text-lg">&ldquo;{t.text}&rdquo;</p>
               <div className="flex items-center">
                 <Image
                   src={t.avatar}

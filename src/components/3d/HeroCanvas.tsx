@@ -1,11 +1,9 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { MeshTransmissionMaterial, OrbitControls, Sphere } from '@react-three/drei'
+import { MeshTransmissionMaterial } from '@react-three/drei'
+import * as THREE from 'three'
 import { useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { gsap } from 'gsap'
-import { useEffect } from 'react'
 
 interface AnimatedSphereProps {
   scrollY: number
@@ -22,13 +20,13 @@ function AnimatedSphere({ scrollY }: AnimatedSphereProps) {
   })
 
   return (
-    <Sphere
+    <mesh
       ref={meshRef}
-      args={[1, 100, 200]}
       scale={2}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
+      <sphereGeometry args={[1, 100, 200]} />
       <MeshTransmissionMaterial
         color="#22c55e"
         transmission={0.8}
@@ -38,28 +36,16 @@ function AnimatedSphere({ scrollY }: AnimatedSphereProps) {
         chromaticAberration={0.2}
         distortion={hovered ? 0.3 : 0}
       />
-    </Sphere>
+    </mesh>
   )
 }
 
 export default function HeroCanvas() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [scrollY, setScrollY] = useState(0)
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
-    <div ref={containerRef} className="absolute inset-0 z-10">
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <AnimatedSphere scrollY={scrollY} />
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.3} />
-      </Canvas>
-    </div>
+    <Canvas camera={{ position: [0, 0, 5] }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
+      <AnimatedSphere scrollY={0} />
+    </Canvas>
   )
 }

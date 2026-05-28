@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
-import { Clock, Droplet, Hammer, Wrench, Bath, Pipe } from 'lucide-react'
+import { Clock, Droplet, Hammer, Wrench, Bath, PenTool } from 'lucide-react'
 
 export default function Services() {
   const services = [
@@ -28,7 +28,7 @@ export default function Services() {
       color: 'plumb-blue'
     },
     { 
-      icon: Pipe, 
+      icon: PenTool, 
       title: 'Drain Cleaning', 
       price: 'From $80', 
       desc: 'Professional drain unclogging and maintenance',
