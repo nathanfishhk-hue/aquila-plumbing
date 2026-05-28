@@ -1,8 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { verifyPayfastITN } from '@/lib/payfast'
 import { createServerClient } from '@supabase/ssr'
 
-export async function POST(request: NextRequest) {
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
+export async function POST(request: Request) {
   const formData = await request.formData()
   const data: Record<string, string> = {}
   

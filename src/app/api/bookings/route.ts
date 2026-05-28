@@ -1,22 +1,25 @@
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 import { createServerClient } from '@supabase/ssr'
 
-function getSupabase(request: any) {
+function getSupabase() {
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder',
     {
       cookies: {
         getAll() {
-          return request?.cookies?.getAll?.() || []
+          return []
         },
-        setAll(cookiesToSet: any[]) {},
+        setAll() {},
       },
     }
   )
 }
 
-export async function POST(request: any) {
-  const supabase = getSupabase(request)
+export async function POST(request: Request) {
+  const supabase = getSupabase()
 
   const { data: { session } } = await supabase.auth.getSession()
 

@@ -1,78 +1,22 @@
 'use client'
 
-import { Auth } from '@supabase/auth-ui-react'
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase/client'
-
-export const dynamic = 'force-dynamic'
 
 export default function RegisterPage() {
-  const [supabaseReady, setSupabaseReady] = useState(false)
-  const [supabase, setSupabase] = useState<any>(null)
-
-  useEffect(() => {
-    try {
-      const client = createClient()
-      setSupabase(client)
-      setSupabaseReady(true)
-    } catch (error) {
-      console.error('Supabase client initialization failed:', error)
-    }
-  }, [])
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-plumb-blue-50 to-plumb-green-50 p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="w-full max-w-md space-y-8"
-      >
-        <div className="text-center">
-          <Link href="/" className="inline-block">
-            <h1 className="text-4xl font-black bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent mb-2">
-              Aquila Plumbing
-            </h1>
-          </Link>
-          <p className="text-muted-foreground">Create your account</p>
-        </div>
-
-        {supabaseReady && supabase ? (
-          <div className="bg-card rounded-2xl shadow-xl p-8">
-            <Auth
-              supabaseClient={supabase}
-              providers={['google', 'github']}
-              view="sign_up"
-              appearance={{
-                theme: ThemeSupa,
-                variables: {
-                  default: {
-                    colors: {
-                      brand: 'hsl(var(--primary))',
-                      brandAccent: 'hsl(var(--primary))',
-                    },
-                  },
-                },
-              }}
-              socialLayout="horizontal"
-            />
-          </div>
-        ) : (
-          <div className="bg-card rounded-2xl shadow-xl p-8 text-center">
-            <p className="text-muted-foreground">Configure Supabase environment variables to enable authentication</p>
-          </div>
-        )}
-
-        <p className="text-center text-sm text-muted-foreground">
-          Already have an account?{' '}
-          <Link href="/auth/login" className="text-plumb-green-600 hover:underline font-medium">
-            Sign In
-          </Link>
+      <div className="w-full max-w-md text-center">
+        <h1 className="text-4xl font-black bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent mb-4">
+          Aquila Plumbing
+        </h1>
+        <p className="text-muted-foreground mb-8">
+          Registration requires Supabase configuration. 
+          Please configure your environment variables.
         </p>
-      </motion.div>
+        <Link href="/auth/login" className="text-plumb-green-600 hover:underline font-medium">
+          Back to Sign In
+        </Link>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { createPayfastPayment } from '@/lib/payfast'
 
-export async function POST(request: NextRequest) {
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
+export async function POST(request: Request) {
   try {
     const { bookingId, amount, serviceName, userEmail, userName } = await request.json()
 
