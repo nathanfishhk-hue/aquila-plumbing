@@ -1,15 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Wrench, LogOut } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { User } from '@supabase/supabase-js'
 
 export default function Header() {
-  const pathname = usePathname()
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<any>(null)
   const [supabase, setSupabase] = useState<any>(null)
 
   useEffect(() => {
@@ -27,8 +24,8 @@ export default function Header() {
         })
         
         return () => subscription.unsubscribe()
-      } catch (error) {
-        console.error('Supabase initialization failed:', error)
+      } catch (_error) {
+        console.error('Supabase initialization failed')
       }
     }
     

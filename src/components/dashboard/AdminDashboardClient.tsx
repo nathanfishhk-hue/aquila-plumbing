@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Calendar, Users, Wrench, BarChart3, Settings, Plus, Edit, Trash2 } from 'lucide-react'
+import { Calendar, BarChart3, Plus, Edit, Trash2, Wrench } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Database } from '@/lib/database.types'
 
@@ -15,10 +15,10 @@ type Plumber = { id: string; full_name: string }
 interface AdminDashboardClientProps {
   bookings: Booking[]
   services: Service[]
-  plumbers: Plumber[]
+  plumbers?: Plumber[]
 }
 
-export default function AdminDashboardClient({ bookings, services, plumbers }: AdminDashboardClientProps) {
+export default function AdminDashboardClient({ bookings, services }: AdminDashboardClientProps) {
   const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics'>('bookings')
 
   const stats = {

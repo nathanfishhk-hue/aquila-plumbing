@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CheckCircle, Zap, Shield, Clock, Droplet, Hammer, Wrench } from 'lucide-react'
+import { Zap, Shield, Clock, Droplet } from 'lucide-react'
 
 export default function Features() {
   const features = [
