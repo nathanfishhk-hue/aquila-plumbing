@@ -3,26 +3,43 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Wrench, Calendar, Users, Settings, LogOut } from 'lucide-react'
-import { createClient } from '@/lib/supabase/client'
+import { Wrench, LogOut } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { User } from '@supabase/supabase-js'
 
 export default function Header() {
   const pathname = usePathname()
-  const supabase = createClient()
   const [user, setUser] = useState<User | null>(null)
+  const [supabase, setSupabase] = useState<any>(null)
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
+    const initSupabase = async () => {
+      try {
+        const { createClient } = await import('@/lib/supabase/client')
+        const client = createClient()
+        setSupabase(client)
+        
+        const { data: { user } } = await client.auth.getUser()
+        setUser(user)
+        
+        const { data: { subscription } } = client.auth.onAuthStateChange((_event, session) => {
+          setUser(session?.user || null)
+        })
+        
+        return () => subscription.unsubscribe()
+      } catch (error) {
+        console.error('Supabase initialization failed:', error)
+      }
     }
-    fetchUser()
-  }, [supabase])
+    
+    initSupabase()
+  }, [])
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut()
+    if (supabase) {
+      await supabase.auth.signOut()
+      setUser(null)
+    }
   }
 
   return (
