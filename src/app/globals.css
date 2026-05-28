@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --primary: 150 80% 30%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 80% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 10% 96%;
+    --muted-foreground: 215.4 12.6% 40%;
+    --accent: 150 80% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 150 80% 30%;
+  }
+  
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 213 12.6% 63.9%;
+    --card: 224 71.4% 6.1%;
+    --card-foreground: 213 12.6% 93.9%;
+    --primary: 150 80% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 80% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 215 27.9% 15.9%;
+    --muted-foreground: 215.4 12.6% 50%;
+    --accent: 150 80% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 215.3 25.4% 26.7%;
+    --input: 215.3 25.4% 26.7%;
+    --ring: 150 80% 35%;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
