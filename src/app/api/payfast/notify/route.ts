@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
 
   const isValid = await verifyPayfastITN(data)
 
-  if (isValid) {
+  if (isValid && process.env.NEXT_PUBLIC_SUPABASE_URL) {
     const bookingId = data.m_payment_id
     
     const supabase = createServerClient(

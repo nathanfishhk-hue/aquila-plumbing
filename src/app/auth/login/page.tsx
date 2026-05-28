@@ -2,12 +2,26 @@
 
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { createClient } from '@/lib/supabase/client'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
+
+export const dynamic = 'force-dynamic'
 
 export default function LoginPage() {
-  const supabase = createClient()
+  const [supabaseReady, setSupabaseReady] = useState(false)
+  const [supabase, setSupabase] = useState<any>(null)
+
+  useEffect(() => {
+    try {
+      const client = createClient()
+      setSupabase(client)
+      setSupabaseReady(true)
+    } catch (error) {
+      console.error('Supabase client initialization failed:', error)
+    }
+  }, [])
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-plumb-green-50 to-plumb-blue-50 p-4">
@@ -26,24 +40,30 @@ export default function LoginPage() {
           <p className="text-muted-foreground">Sign in to your account</p>
         </div>
 
-        <div className="bg-card rounded-2xl shadow-xl p-8">
-          <Auth
-            supabaseClient={supabase}
-            providers={['google', 'github']}
-            appearance={{
-              theme: ThemeSupa,
-              variables: {
-                default: {
-                  colors: {
-                    brand: 'hsl(var(--primary))',
-                    brandAccent: 'hsl(var(--primary))',
+        {supabaseReady && supabase ? (
+          <div className="bg-card rounded-2xl shadow-xl p-8">
+            <Auth
+              supabaseClient={supabase}
+              providers={['google', 'github']}
+              appearance={{
+                theme: ThemeSupa,
+                variables: {
+                  default: {
+                    colors: {
+                      brand: 'hsl(var(--primary))',
+                      brandAccent: 'hsl(var(--primary))',
+                    },
                   },
                 },
-              },
-            }}
-            socialLayout="horizontal"
-          />
-        </div>
+              }}
+              socialLayout="horizontal"
+            />
+          </div>
+        ) : (
+          <div className="bg-card rounded-2xl shadow-xl p-8 text-center">
+            <p className="text-muted-foreground">Configure Supabase environment variables to enable authentication</p>
+          </div>
+        )}
 
         <p className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{' '}

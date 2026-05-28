@@ -1,19 +1,28 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
-export async function GET(request: NextRequest) {
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+function getSupabase(request: any) {
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder',
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll()
+          return request?.cookies?.getAll?.() || []
         },
-        setAll() {},
+        setAll(cookiesToSet: any[]) {},
       },
     }
   )
+}
+
+export async function GET(request: any) {
+  const supabase = getSupabase(request)
+
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    return new Response(JSON.stringify([]), { 
+      headers: { 'Content-Type': 'application/json' }
+    })
+  }
 
   const { data: services, error } = await supabase
     .from('services')
@@ -22,8 +31,13 @@ export async function GET(request: NextRequest) {
     .order('name')
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return new Response(JSON.stringify({ error: error.message }), { 
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 
-  return NextResponse.json(services)
+  return new Response(JSON.stringify(services), { 
+    headers: { 'Content-Type': 'application/json' }
+  })
 }
