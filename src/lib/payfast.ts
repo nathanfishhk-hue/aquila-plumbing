@@ -22,6 +22,13 @@ const payfastRequestSchema = z.object({
   notifyUrl: z.string().url(),
 })
 
+const subscriptionSchema = z.object({
+  tenantId: z.string(),
+  tenantName: z.string(),
+  plan: z.enum(['free', 'pro', 'enterprise']),
+  email: z.string().email(),
+})
+
 export async function generatePayfastSignature(data: z.infer<typeof payfastRequestSchema>): Promise<string> {
   const payload = {
     ...data,
@@ -82,6 +89,55 @@ export async function createPayfastPayment(paymentData: {
   return `${baseUrl}?${params.toString()}`
 }
 
+export async function createPayfastSubscription(subscriptionData: z.infer<typeof subscriptionSchema>): Promise<string> {
+  const returnUrl = `${payfastConfig.siteUrl}/dashboard/admin?subscription=success`
+  const cancelUrl = `${payfastConfig.siteUrl}/auth/register?subscription=cancelled`
+  const notifyUrl = `${payfastConfig.siteUrl}/api/payfast/notify`
+
+  const prices = {
+    free: 0,
+    pro: 299,
+    enterprise: 999,
+  }
+  const amount = prices[subscriptionData.plan]
+
+  const signature = await generatePayfastSignature({
+    paymentId: `sub_${subscriptionData.tenantId}`,
+    amount,
+    itemName: `${subscriptionData.tenantName} Subscription`,
+    itemDescription: `${subscriptionData.plan} plan subscription for ${subscriptionData.tenantName}`,
+    email: subscriptionData.email,
+    name: subscriptionData.tenantName,
+    returnUrl,
+    cancelUrl,
+    notifyUrl,
+  })
+
+  const baseUrl = payfastConfig.sandbox 
+    ? 'https://sandbox.payfast.co.za/eng/process'
+    : 'https://www.payfast.co.za/eng/process'
+
+  const params = new URLSearchParams({
+    merchant_id: payfastConfig.merchantId,
+    merchant_key: payfastConfig.merchantKey,
+    return_url: returnUrl,
+    cancel_url: cancelUrl,
+    notify_url: notifyUrl,
+    amount: amount.toString(),
+    item_name: `${subscriptionData.tenantName} Subscription`,
+    item_description: `${subscriptionData.plan} plan subscription for ${subscriptionData.tenantName}`,
+    email_address: subscriptionData.email,
+    name_first: subscriptionData.tenantName.split(' ')[0],
+    name_last: subscriptionData.tenantName.split(' ').slice(1).join(' ') || '',
+    signature,
+    recurring_amount: amount.toString(),
+    frequency: '3',
+    cycles: '0',
+  })
+
+  return `${baseUrl}?${params.toString()}`
+}
+
 export async function verifyPayfastITN(data: Record<string, string>): Promise<boolean> {
   const verifyData = {
     ...data,
@@ -92,7 +148,6 @@ export async function verifyPayfastITN(data: Record<string, string>): Promise<bo
   const verifyString = Object.keys(verifyData)
     .map(key => `${key}=${encodeURIComponent((verifyData as any)[key])}`)
     .join('&')
-    .replace('signature=', 'signature=placeholder&')
 
   const verifyUrl = payfastConfig.sandbox
     ? 'https://sandbox.payfast.co.za/eng/query/validate'

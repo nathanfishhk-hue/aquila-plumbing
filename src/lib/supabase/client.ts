@@ -10,8 +10,5 @@ export function createClient() {
     throw new Error('Supabase URL and API key are required. Check your .env.local file.')
   }
 
-  return createBrowserClient(
-    supabaseUrl,
-    supabaseAnonKey
-  )
+  return createBrowserClient(supabaseUrl, supabaseAnonKey)
 }

@@ -4,6 +4,7 @@ export type Database = {
       profiles: {
         Row: {
           id: string
+          tenant_id: string | null
           full_name: string | null
           phone: string | null
           address: string | null
@@ -13,6 +14,7 @@ export type Database = {
         }
         Insert: {
           id?: string
+          tenant_id?: string | null
           full_name?: string | null
           phone?: string | null
           address?: string | null
@@ -22,6 +24,7 @@ export type Database = {
         }
         Update: {
           id?: string
+          tenant_id?: string | null
           full_name?: string | null
           phone?: string | null
           address?: string | null
@@ -33,6 +36,7 @@ export type Database = {
       services: {
         Row: {
           id: string
+          tenant_id: string | null
           name: string
           description: string | null
           base_price: number
@@ -42,6 +46,7 @@ export type Database = {
         }
         Insert: {
           id?: string
+          tenant_id?: string | null
           name: string
           description?: string | null
           base_price: number
@@ -51,6 +56,7 @@ export type Database = {
         }
         Update: {
           id?: string
+          tenant_id?: string | null
           name?: string
           description?: string | null
           base_price?: number
@@ -62,6 +68,7 @@ export type Database = {
       bookings: {
         Row: {
           id: string
+          tenant_id: string | null
           user_id: string
           service_id: string
           plumber_id: string | null
@@ -74,6 +81,7 @@ export type Database = {
         }
         Insert: {
           id?: string
+          tenant_id?: string | null
           user_id: string
           service_id: string
           plumber_id?: string | null
@@ -86,6 +94,7 @@ export type Database = {
         }
         Update: {
           id?: string
+          tenant_id?: string | null
           user_id?: string
           service_id?: string
           plumber_id?: string | null
@@ -100,6 +109,7 @@ export type Database = {
       availability: {
         Row: {
           id: string
+          tenant_id: string | null
           plumber_id: string
           day_of_week: number
           start_time: string
@@ -107,6 +117,7 @@ export type Database = {
         }
         Insert: {
           id?: string
+          tenant_id?: string | null
           plumber_id: string
           day_of_week: number
           start_time: string
@@ -114,6 +125,7 @@ export type Database = {
         }
         Update: {
           id?: string
+          tenant_id?: string | null
           plumber_id?: string
           day_of_week?: number
           start_time?: string
@@ -138,6 +150,143 @@ export type Database = {
           booking_id?: string
           rating?: number
           comment?: string | null
+        }
+      }
+      tenants: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          email: string | null
+          phone: string | null
+          address: string | null
+          logo_url: string | null
+          subscription_plan: 'free' | 'pro' | 'enterprise'
+          subscription_status: 'active' | 'cancelled' | 'past_due'
+          subscription_expires_at: string | null
+          payfast_token: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          email?: string | null
+          phone?: string | null
+          address?: string | null
+          logo_url?: string | null
+          subscription_plan?: 'free' | 'pro' | 'enterprise'
+          subscription_status?: 'active' | 'cancelled' | 'past_due'
+          subscription_expires_at?: string | null
+          payfast_token?: string | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          email?: string | null
+          phone?: string | null
+          address?: string | null
+          logo_url?: string | null
+          subscription_plan?: 'free' | 'pro' | 'enterprise'
+          subscription_status?: 'active' | 'cancelled' | 'past_due'
+          subscription_expires_at?: string | null
+          payfast_token?: string | null
+          created_at?: string
+        }
+      }
+      tenant_members: {
+        Row: {
+          id: string
+          tenant_id: string
+          user_id: string
+          role: 'owner' | 'admin' | 'user'
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          tenant_id: string
+          user_id: string
+          role?: 'owner' | 'admin' | 'user'
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          tenant_id?: string
+          user_id?: string
+          role?: 'owner' | 'admin' | 'user'
+          created_at?: string
+        }
+      }
+      notifications: {
+        Row: {
+          id: string
+          tenant_id: string | null
+          plumber_id: string
+          booking_id: string | null
+          title: string
+          message: string
+          type: 'urgent' | 'schedule' | 'payment' | 'general'
+          read: boolean
+          sent_at: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          tenant_id?: string | null
+          plumber_id: string
+          booking_id?: string | null
+          title: string
+          message: string
+          type?: 'urgent' | 'schedule' | 'payment' | 'general'
+          read?: boolean
+          sent_at?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          tenant_id?: string | null
+          plumber_id?: string
+          booking_id?: string | null
+          title?: string
+          message?: string
+          type?: 'urgent' | 'schedule' | 'payment' | 'general'
+          read?: boolean
+          sent_at?: string
+          created_at?: string
+        }
+      }
+      payment_methods: {
+        Row: {
+          id: string
+          profile_id: string
+          type: 'credit_card' | 'bank_transfer' | 'bitcoin'
+          provider: string | null
+          details: Record<string, unknown> | null
+          is_default: boolean
+          is_active: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          type: 'credit_card' | 'bank_transfer' | 'bitcoin'
+          provider?: string | null
+          details?: Record<string, unknown> | null
+          is_default?: boolean
+          is_active?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          type?: 'credit_card' | 'bank_transfer' | 'bitcoin'
+          provider?: string | null
+          details?: Record<string, unknown> | null
+          is_default?: boolean
+          is_active?: boolean
+          created_at?: string
         }
       }
     }

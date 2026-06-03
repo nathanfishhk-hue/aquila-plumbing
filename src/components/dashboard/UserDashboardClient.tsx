@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { User } from '@supabase/supabase-js'
 import { Database } from '@/lib/database.types'
+import { createClient } from '@/lib/supabase/client'
+import Link from 'next/link'
 
 type Profile = Database['public']['Tables']['profiles']['Row']
 type Booking = Database['public']['Tables']['bookings']['Row'] & {
@@ -15,6 +17,20 @@ interface UserDashboardClientProps {
   user: User
   profile: Profile | null
   bookings: Booking[]
+}
+
+function BookingSkeleton() {
+  return (
+    <div className="bg-card rounded-lg p-6 shadow-sm border animate-pulse">
+      <div className="flex items-center justify-between mb-4">
+        <div className="space-y-2">
+          <div className="h-5 w-32 bg-muted rounded" />
+          <div className="h-4 w-48 bg-muted rounded" />
+        </div>
+        <div className="h-6 w-20 bg-muted rounded-full" />
+      </div>
+    </div>
+  )
 }
 
 export default function UserDashboardClient({ user, profile, bookings }: UserDashboardClientProps) {
@@ -95,6 +111,9 @@ export default function UserDashboardClient({ user, profile, bookings }: UserDas
                   <div className="text-center py-12">
                     <Calendar className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
                     <p className="text-lg text-muted-foreground">No upcoming bookings</p>
+                    <Link href="/services" className="text-plumb-green-600 hover:underline mt-2 inline-block">
+                      Browse services to book
+                    </Link>
                   </div>
                 ) : (
                   upcomingBookings.map((booking) => (
@@ -114,7 +133,7 @@ export default function UserDashboardClient({ user, profile, bookings }: UserDas
                           {booking.status}
                         </span>
                       </div>
-                      
+
                       <div className="grid md:grid-cols-3 gap-4 text-sm">
                         <div>
                           <span className="text-muted-foreground">Scheduled</span>

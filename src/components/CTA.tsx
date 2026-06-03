@@ -15,16 +15,16 @@ export default function CTA() {
         >
           <h2 className="text-5xl font-black mb-6">Ready to Get Started?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Book your service today and experience professional plumbing at its finest
+            Create your plumbing business account and start managing bookings today
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth/register">
+            <Link href="/auth/register/business">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 rounded-lg bg-white text-plumb-green-600 font-bold text-lg shadow-lg hover:shadow-xl transition-all"
               >
-                Create Account
+                Create Your Business
               </motion.button>
             </Link>
             <Link href="/auth/login">
