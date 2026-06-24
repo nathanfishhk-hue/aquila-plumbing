@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
@@ -19,20 +18,16 @@ export default function ContactPage() {
   }
 
   const contactInfo = [
-    { icon: Phone, label: 'Phone', value: '(555) 123-4567' },
-    { icon: Mail, label: 'Email', value: 'hello@aquilaplumbing.com' },
-    { icon: MapPin, label: 'Address', value: '123 Main St, Your City, ST 12345' },
-    { icon: Clock, label: 'Hours', value: 'Mon–Fri 8am–6pm, Sat 9am–2pm' },
-  ]
+  { icon: Phone, label: 'Phone', value: '+27 83 237 9132 (Steven Freislich)' },
+  { icon: Mail, label: 'Email', value: 'punctualplumbers@outlook.com' },
+  { icon: MapPin, label: 'Location', value: 'Garden Route, South Africa' },
+  { icon: Clock, label: 'Hours', value: 'Available for commercial projects throughout Garden Route' },
+]
 
   return (
     <section className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-4xl mx-auto"
-        >
+        <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent">
             Contact Us
           </h1>
@@ -94,7 +89,7 @@ export default function ContactPage() {
               </button>
             </form>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

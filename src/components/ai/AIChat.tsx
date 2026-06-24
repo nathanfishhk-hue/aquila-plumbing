@@ -102,7 +102,7 @@ export function AIChat({ context }: AIChatProps) {
         <div className="fixed bottom-6 right-6 z-50 w-96 max-h-[600px] bg-white border border-gray-200 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
           <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-plumb-green-600 text-white">
             <div>
-              <h3 className="font-semibold">Aquila Assistant</h3>
+              <h3 className="font-semibold">Punctual Plumbers Assistant</h3>
               <p className="text-xs text-green-100">Smart routing & payments</p>
             </div>
             <button
@@ -123,7 +123,7 @@ export function AIChat({ context }: AIChatProps) {
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
             {messages.length === 0 && (
               <div className="text-center text-sm text-muted-foreground py-8">
-                <p className="mb-2">Hi! I&apos;m Aquila Assistant with smart routing.</p>
+                <p className="mb-2">Hi! I&apos;m Punctual Plumbers Assistant.</p>
                 <p>I can check availability, calculate prices, and process payments.</p>
               </div>
             )}

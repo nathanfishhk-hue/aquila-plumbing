@@ -9,43 +9,43 @@ export default function Services() {
     { 
       icon: Droplet, 
       title: 'Emergency Repairs', 
-      price: 'From $150', 
-      desc: 'Burst pipes, leaks, and urgent fixes handled fast',
+      price: 'From R350', 
+      desc: 'Leaking/faulty WC, pressure valves, leaking taps, burst pipes',
       color: 'plumb-blue'
     },
     { 
       icon: Wrench, 
-      title: 'Fixture Installation', 
-      price: 'From $100', 
-      desc: 'Faucets, sinks, toilets, and water heaters installed professionally',
+      title: 'Sanitary & Brassware', 
+      price: 'From R250', 
+      desc: 'Repair / replacement of sanitary and brassware',
       color: 'plumb-green'
     },
     { 
       icon: Bath, 
-      title: 'Bathroom Remodeling', 
-      price: 'From $500', 
-      desc: 'Complete bathroom renovations with modern fixtures',
+      title: 'Geyser Replacement', 
+      price: 'From R1500', 
+      desc: 'Professional geyser installation and replacement',
       color: 'plumb-blue'
     },
     { 
       icon: PenTool, 
       title: 'Drain Cleaning', 
-      price: 'From $80', 
-      desc: 'Professional drain unclogging and maintenance',
+      price: 'From R200', 
+      desc: 'Professional drain cleaning services',
       color: 'plumb-green'
     },
     { 
       icon: Hammer, 
-      title: 'Pipe Replacement', 
-      price: 'From $200', 
-      desc: 'Replace old or damaged pipes with modern solutions',
+      title: 'Construction Plumbing', 
+      price: 'From R800', 
+      desc: 'Hot/cold water reticulation, drainage, storm water',
       color: 'plumb-blue'
     },
     { 
       icon: Clock, 
-      title: 'Maintenance', 
-      price: 'From $75', 
-      desc: 'Regular check-ups to prevent costly repairs',
+      title: 'Tenant Installations', 
+      price: 'From R250', 
+      desc: 'Tenant installations and renovations',
       color: 'plumb-green'
     },
   ]

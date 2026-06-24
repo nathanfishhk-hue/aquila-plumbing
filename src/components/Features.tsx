@@ -5,10 +5,10 @@ import { Zap, Shield, Clock, Droplet } from 'lucide-react'
 
 export default function Features() {
   const features = [
-    { icon: Zap, title: '24/7 Emergency', desc: 'Available anytime for urgent repairs' },
-    { icon: Shield, title: 'Licensed Experts', desc: 'Certified professionals you can trust' },
-    { icon: Clock, title: 'On-Time Guarantee', desc: 'We arrive when promised' },
-    { icon: Droplet, title: 'Water Quality', desc: 'Clean, safe, and lasting solutions' },
+    { icon: Zap, title: 'Commercial & Industrial', desc: 'Medium to large projects, residential blocks, office parks, shopping malls and warehouses' },
+    { icon: Shield, title: 'SABS & SANS Compliant', desc: 'Quality control and assurance, certificates of compliance issued' },
+    { icon: Clock, title: 'Dedicated Supervision', desc: 'Foreman and contract manager oversight on all sites' },
+    { icon: Droplet, title: 'Garden Route Coverage', desc: 'Serving the entire Garden Route region' },
   ]
 
   return (
@@ -22,7 +22,7 @@ export default function Features() {
         >
           <h2 className="text-5xl font-black mb-4">Why Choose Us</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional, reliable, and guaranteed plumbing services
+            Specialising in commercial and industrial plumbing across Garden Route
           </p>
         </motion.div>
 

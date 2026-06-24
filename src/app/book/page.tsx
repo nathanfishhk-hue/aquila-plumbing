@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { createClient } from '@/lib/supabase/client'
 import { Database } from '@/lib/database.types'
 import { z } from 'zod'
@@ -113,11 +112,7 @@ export default function BookServicePage() {
           <ArrowLeft className="h-4 w-4" />
           Back to Services
         </Link>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-card rounded-2xl shadow-xl p-8"
-        >
+        <div className="bg-card rounded-2xl shadow-xl p-8">
           <h1 className="text-3xl font-black mb-2">Book a Service</h1>
           <p className="text-muted-foreground mb-8">Fill in the details below to schedule your appointment</p>
           {error && <div className="mb-6 p-4 rounded-lg bg-red-50 text-red-600 text-sm">{error}</div>}
@@ -132,9 +127,9 @@ export default function BookServicePage() {
               >
                 <option value="">Select a service</option>
                 {services.map((service) => (
-                  <option key={service.id} value={service.id}>
-                    {service.name} — ${service.base_price}
-                  </option>
+<option key={service.id} value={service.id}>
+                      {service.name} — R{service.base_price}
+                    </option>
                 ))}
               </select>
             </div>
@@ -183,7 +178,7 @@ export default function BookServicePage() {
               {submitting ? 'Booking...' : 'Confirm Booking'}
             </button>
           </form>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

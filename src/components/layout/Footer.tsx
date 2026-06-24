@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Wrench, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
-import { motion } from 'framer-motion'
+// motion import removed
 
 export default function Footer() {
   return (
@@ -12,10 +12,10 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center space-x-2 mb-4">
               <Wrench className="h-8 w-8 text-plumb-green-400" />
-              <span className="text-2xl font-bold">Aquila Plumbing</span>
+              <span className="text-2xl font-bold">Punctual Plumbers</span>
             </Link>
             <p className="text-gray-300">
-              Professional plumbing services you can trust. Available 24/7 for emergencies.
+              Medium to large commercial and industrial projects, residential blocks, office parks, shopping malls and warehouses.
             </p>
           </div>
 
@@ -34,15 +34,15 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-300">
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>(555) 123-4567</span>
+                <span>+27 83 237 9132 (Steven Freislich)</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@aquilaplumbing.com</span>
+                <span>punctualplumbers@outlook.com</span>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>123 Main St, Your City</span>
+                <span>Garden Route, South Africa</span>
               </li>
             </ul>
           </div>
@@ -50,21 +50,21 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <motion.a href="#" whileHover={{ scale: 1.2 }} className="text-gray-300 hover:text-plumb-green-400">
+              <span className="text-gray-300 hover:text-plumb-green-400 transition-transform hover:scale-110 inline-block cursor-pointer">
                 <Facebook className="h-6 w-6" />
-              </motion.a>
-              <motion.a href="#" whileHover={{ scale: 1.2 }} className="text-gray-300 hover:text-plumb-green-400">
+              </span>
+              <span className="text-gray-300 hover:text-plumb-green-400 transition-transform hover:scale-110 inline-block cursor-pointer">
                 <Instagram className="h-6 w-6" />
-              </motion.a>
-              <motion.a href="#" whileHover={{ scale: 1.2 }} className="text-gray-300 hover:text-plumb-green-400">
+              </span>
+              <span className="text-gray-300 hover:text-plumb-green-400 transition-transform hover:scale-110 inline-block cursor-pointer">
                 <Twitter className="h-6 w-6" />
-              </motion.a>
+              </span>
             </div>
           </div>
         </div>
 
         <div className="border-t border-plumb-blue-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Aquila Plumbing. All rights reserved.</p>
+          <p>&copy; 2023 Punctual Plumbers. All rights reserved. | Garden Route</p>
         </div>
       </div>
     </footer>

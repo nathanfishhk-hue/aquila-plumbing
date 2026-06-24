@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { Wrench, LogOut, Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
@@ -49,18 +49,13 @@ export default function Header() {
   ]
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b"
-    >
+    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b">
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
           <Wrench className="h-8 w-8 text-plumb-green-600" />
-          <span className="text-2xl font-bold bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent">
-            Aquila Plumbing
-          </span>
+<span className="text-2xl font-bold bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent">
+              Punctual Plumbers
+            </span>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-8">
@@ -109,12 +104,7 @@ export default function Header() {
 
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t bg-background"
-          >
+          <div className="md:hidden border-t bg-background">
             <nav className="container mx-auto px-6 py-4 flex flex-col space-y-4">
               {navLinks.map((link) => (
                 <Link
@@ -150,9 +140,9 @@ export default function Header() {
                 )}
               </div>
             </nav>
-          </motion.div>
+          </div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   )
 }

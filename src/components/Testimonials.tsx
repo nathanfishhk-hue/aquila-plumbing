@@ -9,7 +9,7 @@ export default function Testimonials() {
       name: 'Sarah Johnson',
       location: 'Downtown',
       rating: 5,
-      text: 'Aquila Plumbing saved us during a major leak emergency. Quick response and excellent work!',
+      text: 'Punctual Plumbers provided excellent commercial plumbing solutions for our office park. Professional and reliable!',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
     },
     {

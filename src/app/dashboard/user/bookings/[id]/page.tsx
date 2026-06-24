@@ -5,7 +5,6 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Database } from '@/lib/database.types'
-import { motion } from 'framer-motion'
 import { CheckCircle, Calendar, ArrowLeft } from 'lucide-react'
 
 type Booking = Database['public']['Tables']['bookings']['Row'] & {
@@ -73,11 +72,7 @@ export default function BookingConfirmationPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-plumb-blue-50 to-plumb-green-50 p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="max-w-md w-full bg-card rounded-2xl shadow-xl p-8 text-center space-y-6"
-      >
+      <div className="max-w-md w-full bg-card rounded-2xl shadow-xl p-8 text-center space-y-6">
         <div className={`w-16 h-16 rounded-full mx-auto flex items-center justify-center ${
           isSuccess ? 'bg-green-100' : isCancelled ? 'bg-red-100' : 'bg-yellow-100'
         }`}>
@@ -103,7 +98,7 @@ export default function BookingConfirmationPage() {
           <p><span className="font-medium">Service:</span> {booking.services?.name}</p>
           <p><span className="font-medium">Date:</span> {new Date(booking.scheduled_at).toLocaleString()}</p>
           <p><span className="font-medium">Status:</span> <span className="capitalize">{booking.status}</span></p>
-          <p><span className="font-medium">Amount:</span> ${booking.amount}</p>
+          <p><span className="font-medium">Amount:</span> R{booking.amount}</p>
         </div>
 
         <div className="flex gap-3">
@@ -120,7 +115,7 @@ export default function BookingConfirmationPage() {
             Book Another
           </Link>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

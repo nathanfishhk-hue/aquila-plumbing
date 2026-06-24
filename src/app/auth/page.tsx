@@ -79,7 +79,7 @@ export default function AuthPage() {
         <div className="text-center">
           <Link href="/" className="inline-block">
             <h1 className="text-4xl font-black bg-gradient-to-r from-plumb-green-600 to-plumb-blue-600 bg-clip-text text-transparent mb-2">
-              Aquila Plumbing
+              Punctual Plumbers
             </h1>
           </Link>
           <p className="text-muted-foreground">

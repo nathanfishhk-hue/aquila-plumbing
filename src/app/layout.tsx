@@ -11,9 +11,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const viewport = 'width=device-width, initial-scale=1'
 
 export const metadata: Metadata = {
-  title: 'Aquila Plumbing | Professional Plumbing Services',
-  description: 'Book expert plumbers for all your plumbing needs. Emergency services, installations, repairs, and maintenance.',
-  keywords: 'plumber, plumbing, emergency, repair, installation, maintenance',
+  title: 'Punctual Plumbers | Construction & Maintenance Services',
+  description: 'Punctual Plumbers specialises in commercial and industrial plumbing. Hot and cold water reticulation, drainage, storm water, sanitary installations, and maintenance.',
+  keywords: 'plumber, plumbing, construction, maintenance, Garden Route, South Africa',
 };
 
 export default function RootLayout({
